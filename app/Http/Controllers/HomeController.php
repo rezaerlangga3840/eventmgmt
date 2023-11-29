@@ -10,6 +10,6 @@ use App\Models\berita;
 class HomeController extends Controller
 {
     public function index(){
-        return redirect('admin');
+        return redirect('dashboard');
     }
 }

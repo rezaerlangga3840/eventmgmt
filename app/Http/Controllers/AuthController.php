@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use Auth;
 
 class AuthController extends Controller
 {
     public function admin(){
-        return redirect('admin/login');
+        return redirect('dashboard/login');
     }
     public function login(){
         if(Auth::check()){
-            return redirect('admin/dashboard');
+            return redirect('dashboard/mainpage');
         }
         return view('admin.auth.login');
     }
@@ -24,7 +25,7 @@ class AuthController extends Controller
         $credentials = $request->only('email','password');
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect('admin/dashboard');
+            return redirect('dashboard/mainpage');
         }
         return back()->withErrors([
             'loginError'=>'Email atau password salah',
@@ -32,6 +33,26 @@ class AuthController extends Controller
     }
     public function logout(){
         Auth::logout();
-        return redirect('admin/login');
+        return redirect('dashboard/login');
     }
+    public function register(Request $request){
+        $previousUrl = $request->input('previous');
+        session(['url.intended' => $previousUrl]);
+        return view('admin.auth.register');
+    }
+    public function registration(Request $request){
+        $request->validate([
+            'name'=>'required',
+            'email'=>'required|email',
+            'password'=>'required|min:8|confirmed',
+        ]);
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+        Auth::login($user);
+        return redirect()->intended('/')->with('success', 'Pendaftaran berhasil. Anda telah masuk.');
+    }
+    
 }

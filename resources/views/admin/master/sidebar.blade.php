@@ -64,7 +64,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('admin.kategori.daftar')}}" class="nav-link">
+              <a href="#" class="nav-link"><!--route('admin.kategori.daftar')-->
                 <p>Kelola Kategori</p>
               </a>
             </li>
@@ -79,7 +79,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('admin.status.daftar')}}" class="nav-link">
+              <a href="#" class="nav-link"><!--route('admin.status.daftar')-->
                 <p>Kelola Status</p>
               </a>
             </li>
@@ -94,7 +94,7 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('admin.produk.daftar')}}" class="nav-link">
+              <a href="#" class="nav-link"><!--route('admin.produk.daftar')-->
                 <p>Kelola Produk</p>
               </a>
             </li>
