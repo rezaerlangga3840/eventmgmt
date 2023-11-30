@@ -91,8 +91,9 @@ Daftar Event
                 <td>{{$ev->date}}</td>
                 <td>{{$ev->time}}</td>
                 <td>{{$ev->location}}</td>
-                <td>{{$ev->slots_available}}</td>
+                <td>{{$ev->slots_available-\App\Models\bookings::where('event_id',$ev->id)->count()}}</td>
                 <td>
+                  <a href="{{route('admin.events.view',['id'=>$ev->id])}}" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                   <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#edit_event_{{ $ev->id }}"><i class="fa fa-edit"></i></button>
                   <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_event_{{ $ev->id }}"><i class="fa fa-trash"></i></button>
                   <!--modal edit-->
@@ -200,14 +201,6 @@ Daftar Event
       "responsive": true,
     });
   });
-  @if(Session::has('added'))
-    toastr.success("{{Session::get('added')}}")
-  @endif
-  @if(Session::has('updated'))
-    toastr.success("{{Session::get('updated')}}")
-  @endif
-  @if(Session::has('deleted'))
-    toastr.success("{{Session::get('deleted')}}")
-  @endif
+  
 </script>
 @endsection

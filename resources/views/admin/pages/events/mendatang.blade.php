@@ -105,17 +105,8 @@ Event Mendatang
       "responsive": true,
     });
   });
-  @if(Session::has('added'))
-    toastr.success("{{Session::get('added')}}")
-  @endif
   @if(Session::has('booked'))
     toastr.success("{{Session::get('booked')}}")
-  @endif
-  @if(Session::has('updated'))
-    toastr.success("{{Session::get('updated')}}")
-  @endif
-  @if(Session::has('deleted'))
-    toastr.success("{{Session::get('deleted')}}")
   @endif
 </script>
 @endsection

@@ -102,6 +102,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{asset('front/js/lightbox.min.js')}}"></script>
     <script src="{{asset('admin_assets/plugins/moment/moment.min.js')}}"></script>
     <script src="{{asset('admin_assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+    <script>
+      @if(Session::has('added'))
+        toastr.success("{{Session::get('added')}}")
+      @endif
+      @if(Session::has('rejected'))
+        toastr.success("{{Session::get('rejected')}}")
+      @endif
+      @if(Session::has('updated'))
+        toastr.success("{{Session::get('updated')}}")
+      @endif
+      @if(Session::has('deleted'))
+        toastr.success("{{Session::get('deleted')}}")
+      @endif
+    </script>
     @yield('customscripts')
   </body>
 </html>

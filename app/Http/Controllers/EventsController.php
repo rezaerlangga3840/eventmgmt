@@ -17,14 +17,14 @@ class EventsController extends Controller
 {
     public function daftar(){
         if(Auth::user()->role=='user'){
-            $events = events::where('created_by_user_id',Auth::user()->id)->orderBy('created_at','desc')->get();
+            $events = events::join('users','users.id','events.created_by_user_id')->where('created_by_user_id',Auth::user()->id)->orderBy('created_at','desc')->paginate(10);
         }else{
-            $events = events::orderBy('created_at','desc')->get();
+            $events = events::orderBy('created_at','desc')->paginate(10);
         }
         return view('admin.pages.events.daftar',['events' => $events]);
     }
     public function mendatang(){
-        $events = events::where('created_by_user_id','!=',Auth::user()->id)->where('date','>',now())->orderBy('created_at','desc')->get();
+        $events = events::join('users','users.id','events.created_by_user_id')->where('date','>',now())->orderBy('created_at','desc')->paginate(10);
         return view('admin.pages.events.mendatang',['events' => $events]);
     }
     public function book($id, Request $request){
@@ -71,6 +71,16 @@ class EventsController extends Controller
         ]);
         return redirect()->route('admin.events.daftar')->with('added','Event telah ditambahkan');
     }
+    public function view($id){
+        $events = events::findOrFail($id);
+        if(Auth::user()->role=='admin'||$events->created_by_user_id==Auth::user()->id){
+            $bookings=bookings::join('users','users.id','bookings.user_id')->select('bookings.*','name','email')->where('event_id',$events->id)->paginate(10);
+            return view('admin.pages.events.view',['events'=>$events,'bookings'=>$bookings]);
+        }else{
+            return redirect()->back()->with('rejected','Akses ditolak');
+        }
+    }
+
     public function update($id, Request $request){
         $events = events::findOrFail($id);
         $validated=$request->validate([
@@ -94,5 +104,20 @@ class EventsController extends Controller
         $events = events::find($id);
         $events->delete();
         return redirect()->back()->with('deleted','Event telah dihapus');
+    }
+    public function upcomingEvents()
+    {
+        $upcomingEvents = events::join('users','users.id','events.created_by_user_id')->where('date', '>', now())->get();
+        return response()->json($upcomingEvents);
+    }
+    public function getEventById($id)
+    {
+        $events = events::find($id);
+
+        if (!$events) {
+            return response()->json(['message' => 'Event tidak ditemukan'], 404);
+        }
+
+        return response()->json($events);
     }
 }
