@@ -48,7 +48,7 @@ Event Mendatang
                   @else
                   Kursi penuh
                   @endif
-                  <!--modal edit-->
+                  
                   <form action="{{route('admin.events.booking',['id'=>$ev->id])}}" enctype="multipart/form-data" method="post">
                     <div class="modal fade" id="booking_kursi_{{ $ev->id }}">
                       <div class="modal-dialog">
@@ -71,6 +71,82 @@ Event Mendatang
                       </div>
                     </div>
                   </form>
+                  <!--modal edit-->
+                  @if($ev->created_by_user_id==Auth::user()->id)
+                  <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#edit_event_{{ $ev->id }}"><i class="fa fa-edit"></i></button>
+                  <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_event_{{ $ev->id }}"><i class="fa fa-trash"></i></button>
+                  <!--modal edit-->
+                  <form action="{{route('admin.events.update',['id'=>$ev->id])}}" enctype="multipart/form-data" method="post"><!---->
+                    <div class="modal fade" id="edit_event_{{ $ev->id }}">
+                      <div class="modal-dialog">
+                        <div class="modal-content bg-primary">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Edit Event</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            @csrf
+                            {{method_field('PUT')}}
+                            <div class="form-group">
+                              <label for="title">Judul</label>
+                              <input type="text" value="{{ $ev->title }}" name="title" class="form-control" id="title" placeholder="Misal : Pelatihan Masak">
+                            </div>
+                            <div class="form-group">
+                              <label for="description">Deskripsi</label>
+                              <textarea name="description" class="form-control" id="description" name="description">{{ $ev->description }}</textarea>
+                            </div>
+                            <div class="form-group">
+                              <label for="date">Tanggal</label>
+                              <input name="date" type="date" value="{{ $ev->date }}" id="date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="time">Waktu</label>
+                              <input name="time" type="time" value="{{ $ev->time }}" id="time" class="form-control">
+                            </div>
+                            <div class="form-group">
+                              <label for="location">Tempat</label>
+                              <input type="text" name="location" value="{{ $ev->location }}" class="form-control" id="location" placeholder="Misal : Restoran">
+                            </div>
+                            <div class="form-group">
+                              <label for="slots_available">Slot</label>
+                              <input type="number" name="slots_available" value="{{ $ev->slots_available }}" class="form-control" id="slots_available">
+                            </div>
+                          </div>
+                          <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-success">Simpan</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  <!--modal delete-->
+                  <form method="POST" action="{{route('admin.events.delete',['id'=>$ev->id])}}">
+                    <div class="modal fade" id="hapus_event_{{$ev->id}}">
+                      <div class="modal-dialog">
+                        <div class="modal-content bg-danger">
+                          <div class="modal-header">
+                            <h4 class="modal-title">Peringatan!</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Yakin ingin hapus event ini?</p>
+                            @csrf
+                            {{method_field('DELETE')}}
+                          </div>
+                          <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-success">Ya, hapus</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                  @endif
                 </td>
               </tr>
             @endforeach

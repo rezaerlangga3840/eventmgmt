@@ -17,14 +17,14 @@ class EventsController extends Controller
 {
     public function daftar(){
         if(Auth::user()->role=='user'){
-            $events = events::join('users','users.id','events.created_by_user_id')->where('created_by_user_id',Auth::user()->id)->orderBy('created_at','desc')->paginate(10);
+            $events = events::join('users','users.id','events.created_by_user_id')->select('events.*','name','email')->where('created_by_user_id',Auth::user()->id)->orderBy('created_at','desc')->paginate(10);
         }else{
             $events = events::orderBy('created_at','desc')->paginate(10);
         }
         return view('admin.pages.events.daftar',['events' => $events]);
     }
     public function mendatang(){
-        $events = events::join('users','users.id','events.created_by_user_id')->where('date','>',now())->orderBy('created_at','desc')->paginate(10);
+        $events = events::join('users','users.id','events.created_by_user_id')->where('date','>',now())->select('events.*','name','email')->orderBy('created_at','desc')->paginate(10);
         return view('admin.pages.events.mendatang',['events' => $events]);
     }
     public function book($id, Request $request){
@@ -107,7 +107,7 @@ class EventsController extends Controller
     }
     public function upcomingEvents()
     {
-        $upcomingEvents = events::join('users','users.id','events.created_by_user_id')->where('date', '>', now())->get();
+        $upcomingEvents = events::join('users','users.id','events.created_by_user_id')->select('events.*','name','email')->where('date', '>', now())->get();
         return response()->json($upcomingEvents);
     }
     public function getEventById($id)
