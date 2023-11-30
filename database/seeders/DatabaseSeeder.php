@@ -36,5 +36,25 @@ class DatabaseSeeder extends Seeder
             'created_by_user_id'=>'1',
             ]
         );
+        events::create([
+            'title'=>'Demo Masak',
+            'description'=>'Demo Masak',
+            'date'=>'2023-12-03',
+            'time'=>'14:00:10',
+            'location'=>'Restoran Bu Rissa TMB',
+            'slots_available'=>'12',
+            'created_by_user_id'=>'1',
+            ]
+        );
+        events::create([
+            'title'=>'Rejeki Nomplok',
+            'description'=>'Undian',
+            'date'=>'2023-12-03',
+            'time'=>'14:00:10',
+            'location'=>'Alun-alun Surabaya Mall 1, Pemuda 33-37, Genteng, Surabaya',
+            'slots_available'=>'12',
+            'created_by_user_id'=>'1',
+            ]
+        );
     }
 }

@@ -37,7 +37,9 @@ Route::group(['prefix'=>'dashboard'], function(){
     Route::get('/logout', [AuthController::class,'logout'])->name('admin.logout')->middleware('auth');
     Route::group(['middleware'=>['auth','roles:admin,user']],function(){
         Route::get('/events',[EventsController::class,'daftar'])->name('admin.events.daftar')->middleware('auth');
+        Route::get('/events/upcoming',[EventsController::class,'mendatang'])->name('admin.events.mendatang')->middleware('auth');
         Route::post('/events/add',[EventsController::class,'save'])->name('admin.events.save')->middleware('auth');
+        Route::get('/events/view/{id}',[EventsController::class,'view'])->name('admin.events.view')->middleware('auth');
         Route::put('/events/edit/{id}',[EventsController::class,'update'])->name('admin.events.update')->middleware('auth');
         Route::delete('/events/delete/{id}',[EventsController::class,'delete'])->name('admin.events.delete')->middleware('auth');
     });
@@ -45,7 +47,7 @@ Route::group(['prefix'=>'dashboard'], function(){
 
     });
     Route::group(['middleware'=>['auth','roles:user']],function(){
-        
+        Route::post('/events/book/{id}',[EventsController::class,'book'])->name('admin.events.booking')->middleware('auth');
     });
     
 });

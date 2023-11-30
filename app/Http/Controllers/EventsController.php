@@ -23,6 +23,27 @@ class EventsController extends Controller
         }
         return view('admin.pages.events.daftar',['events' => $events]);
     }
+    public function mendatang(){
+        $events = events::where('created_by_user_id','!=',Auth::user()->id)->where('date','>',now())->orderBy('created_at','desc')->get();
+        return view('admin.pages.events.mendatang',['events' => $events]);
+    }
+    public function book($id, Request $request){
+        $events=events::findOrFail($id);
+        $user_id=Auth::user()->id;
+        $event_id=$events->id;
+        $booked_at=Carbon::now();
+        if(bookings::where('user_id',Auth::user()->id)->where('event_id',$events->id)->count()==0){
+            bookings::create([
+                'user_id'=>$user_id,
+                'event_id'=>$event_id,
+                'booked_at'=>$booked_at,
+            ]);
+            return redirect()->route('admin.events.mendatang')->with('booked','Kursi telah dipesan');
+        }else{
+            return redirect()->route('admin.events.mendatang')->with('booked','Anda telah memesan kursi di event ini');
+        }
+        
+    }
     public function save(Request $request){
         $validated=$request->validate([
             'title'=>'required',

@@ -29,12 +29,8 @@
         </div>
       </div>
     </div>
-
-    <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-                  with font-awesome or any other icon font library -->
         <li class="nav-item">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
@@ -68,34 +64,9 @@
                 <p>Kelola Event</p>
               </a>
             </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-file"></i>
-            <p>Status
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link"><!--route('admin.status.daftar')-->
-                <p>Kelola Status</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-file"></i>
-            <p>Produk
-              <i class="right fas fa-angle-left"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="#" class="nav-link"><!--route('admin.produk.daftar')-->
-                <p>Kelola Produk</p>
+              <a href="{{route('admin.events.mendatang')}}" class="nav-link"><!---->
+                <p>Akan datang</p>
               </a>
             </li>
           </ul>

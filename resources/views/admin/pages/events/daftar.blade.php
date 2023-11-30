@@ -78,6 +78,7 @@ Daftar Event
             <th>Deskripsi</th>
             <th>Tanggal</th>
             <th>Waktu</th>
+            <th>Tempat</th>
             <th>Slot</th>
             <th>Opsi</th>
           </tr>
@@ -89,9 +90,9 @@ Daftar Event
                 <td>{{$ev->description}}</td>
                 <td>{{$ev->date}}</td>
                 <td>{{$ev->time}}</td>
+                <td>{{$ev->location}}</td>
                 <td>{{$ev->slots_available}}</td>
                 <td>
-                  <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a><!--route('admin.kategori.lihatproduk',['id'=>$ev->id])-->
                   <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#edit_event_{{ $ev->id }}"><i class="fa fa-edit"></i></button>
                   <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#hapus_event_{{ $ev->id }}"><i class="fa fa-trash"></i></button>
                   <!--modal edit-->
