@@ -5,9 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
-use App\Models\kategori;
-use App\Models\status;
-use App\Models\produk;
+use App\Models\events;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,5 +26,15 @@ class DatabaseSeeder extends Seeder
             'password'=>bcrypt('password'),
             'role'=>'admin',
         ]);
+        events::create([
+            'title'=>'Demo Masak',
+            'description'=>'Demo Masak',
+            'date'=>'2023-12-03',
+            'time'=>'14:00:10',
+            'location'=>'Restoran Mbak Yayuk Karangan',
+            'slots_available'=>'12',
+            'created_by_user_id'=>'1',
+            ]
+        );
     }
 }

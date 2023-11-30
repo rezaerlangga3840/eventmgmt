@@ -15,7 +15,7 @@ class Roles
      */
     public function handle(Request $request, Closure $next,...$roles): Response
     {
-        if(in_array($request->user()->privilegelevel, $roles)){
+        if(in_array($request->user()->role, $roles)){
             return $next($request);
         }
         return abort(404);

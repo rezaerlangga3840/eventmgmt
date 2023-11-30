@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\EventsController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserSettingController;
@@ -36,7 +36,10 @@ Route::group(['prefix'=>'dashboard'], function(){
     Route::put('/usersetting/usersettingupdate', [UserSettingController::class,'usersettingupdate'])->name('admin.usersettingupdate')->middleware('auth');
     Route::get('/logout', [AuthController::class,'logout'])->name('admin.logout')->middleware('auth');
     Route::group(['middleware'=>['auth','roles:admin,user']],function(){
-
+        Route::get('/events',[EventsController::class,'daftar'])->name('admin.events.daftar')->middleware('auth');
+        Route::post('/events/add',[EventsController::class,'save'])->name('admin.events.save')->middleware('auth');
+        Route::put('/events/edit/{id}',[EventsController::class,'update'])->name('admin.events.update')->middleware('auth');
+        Route::delete('/events/delete/{id}',[EventsController::class,'delete'])->name('admin.events.delete')->middleware('auth');
     });
     Route::group(['middleware'=>['auth','roles:admin']],function(){
 

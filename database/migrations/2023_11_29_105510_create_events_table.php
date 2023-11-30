@@ -17,7 +17,7 @@ return new class extends Migration
             $table->longText('description');
             $table->date('date');
             $table->time('time');
-            $table->string('location');
+            $table->longText('location');
             $table->integer('slots_available');
             $table->unsignedBigInteger('created_by_user_id');
             $table->foreign('created_by_user_id')->references('id')->on('users')->onUpdate('CASCADE')->onDelete('CASCADE');

@@ -23,6 +23,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('admin_assets/dist/css/adminlte.min.css')}}">
 
+    <link rel="stylesheet" href="{{asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+
+    @yield('customstyles')
+    
     <link rel="stylesheet" href="{{asset('front/css/photogallery.css')}}">
     <link rel="stylesheet" href="{{asset('front/css/lightbox.min.css')}}">
   </head>
@@ -73,6 +77,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{asset('/admin_assets/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{asset('/admin_assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <!-- jQuery UI -->
+    <script src="{{asset('/admin_assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('/admin_assets/dist/js/adminlte.min.js')}}"></script>
     <!--Data Tables-->
@@ -94,6 +100,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{asset('admin_assets/plugins/toastr/toastr.min.js')}}"></script>
     <script src="{{asset('admin_assets/dist/js/ckeditor.js')}}"></script>
     <script src="{{asset('front/js/lightbox.min.js')}}"></script>
+    <script src="{{asset('admin_assets/plugins/moment/moment.min.js')}}"></script>
+    <script src="{{asset('admin_assets/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
     @yield('customscripts')
   </body>
 </html>
